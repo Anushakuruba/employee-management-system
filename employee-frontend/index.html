@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Employee Management System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1>Employee Management System</h1>
+            <p>Manage employee information easily</p>
+        </div>
+    </header>
+
+
+    <!-- Main Content -->
+    <main class="container">
+<div id="notification" class="notification"></div>
+        <!-- Dashboard -->
+<section class="dashboard">
+
+    <div class="dashboard-card">
+
+        <div class="card-icon">
+            👥
+        </div>
+
+        <div>
+            <h3>Total Employees</h3>
+            <p id="totalEmployees">0</p>
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <div class="card-icon">
+            💻
+        </div>
+
+        <div>
+            <h3>IT Department</h3>
+            <p id="itEmployees">0</p>
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-card">
+
+        <div class="card-icon">
+            💰
+        </div>
+
+        <div>
+            <h3>Average Salary</h3>
+            <p id="averageSalary">₹0</p>
+        </div>
+
+    </div>
+
+</section>
+
+        <!-- Employee Section -->
+        <section class="employee-section">
+
+            <div class="section-header">
+
+                <h2>Employees</h2>
+
+                <button id="addEmployeeBtn" class="btn btn-primary">
+                    + Add Employee
+                </button>
+
+            </div>
+
+<div class="filters">
+
+    <div class="search-box">
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search by name, email or department..."
+        >
+    </div>
+
+    <div class="filter-box">
+
+        <label for="departmentFilter">
+            Department:
+        </label>
+
+        <select id="departmentFilter">
+            <option value="all">All Departments</option>
+        </select>
+
+    </div>
+
+    <div class="sort-box">
+
+        <label for="sortSelect">
+            Sort by:
+        </label>
+
+        <select id="sortSelect">
+            <option value="default">Default</option>
+            <option value="nameAsc">Name A-Z</option>
+            <option value="salaryLow">Salary Low to High</option>
+            <option value="salaryHigh">Salary High to Low</option>
+        </select>
+
+    </div>
+
+</div>
+            <!-- Employee Table -->
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Department</th>
+                            <th>Designation</th>
+                            <th>Salary</th>
+                            <th>Joining Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="employeeTableBody">
+
+                        <!-- Employees will be loaded here using JavaScript -->
+
+                    </tbody>
+
+                </table>
+
+            </div>
+<div id="pagination" class="pagination"></div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Add/Edit Employee Modal -->
+    <div id="employeeModal" class="modal">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h2 id="modalTitle">Add Employee</h2>
+
+                <button id="closeModalBtn" class="close-btn">
+                    &times;
+                </button>
+
+            </div>
+
+
+            <!-- Employee Form -->
+            <form id="employeeForm">
+
+                <!-- Hidden ID for Edit -->
+                <input type="hidden" id="employeeId">
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+
+                        <input
+                            type="text"
+                            id="firstName"
+                            required
+                        >
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+
+                        <input
+                            type="text"
+                            id="lastName"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            required
+                        >
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label for="department">Department</label>
+
+                        <input
+                            type="text"
+                            id="department"
+                            required
+                        >
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="designation">Designation</label>
+
+                        <input
+                            type="text"
+                            id="designation"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label for="salary">Salary</label>
+
+                        <input
+                            type="number"
+                            id="salary"
+                            min="0"
+                            required
+                        >
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="joiningDate">Joining Date</label>
+
+                        <input
+                            type="date"
+                            id="joiningDate"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        id="cancelBtn"
+                        class="btn btn-secondary"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+                        Save Employee
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+</html>
